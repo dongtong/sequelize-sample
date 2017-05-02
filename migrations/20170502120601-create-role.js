@@ -3,24 +3,33 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return queryInterface
-      .createTable('Users', {
+      .createTable('Roles', {
         id: {
           type: Sequelize.INTEGER,
           primaryKey: true,
           autoIncrement: true,
           allowNull: false
         },
-        username: Sequelize.STRING,
+        name: Sequelize.STRING,
         createdAt: {
           type: Sequelize.DATE,
           allowNull: false
         },
-        updatedAt: Sequelize.DATE
+        updatedAt: Sequelize.DATE,
+        UserId: {
+          type: Sequelize.INTEGER,
+          onDelete: "CASCADE",
+          allowNull: false,
+          references: {
+            model: 'Users',
+            key: 'id'
+          }
+        }
       });
   },
 
   down: function (queryInterface, Sequelize) {
     return queryInterface
-      .dropTable('Users');
+      .dropTable('Roles');
   }
 };

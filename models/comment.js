@@ -1,14 +1,12 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define("User", {
-    username: DataTypes.STRING
+  var Comment = sequelize.define("Comment", {
+    content: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
-        User.hasMany(models.Task);
-
-        User.belongsTo(models.Project, {
+        Comment.belongsTo(models.User, {
           onDelete: "CASCADE",
           foreignKey: {
             allowNull: false
@@ -18,5 +16,5 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  return User;
+  return Comment;
 };
